@@ -1,8 +1,6 @@
 <?php
-
  // (host, username, password, database)
  $conn = mysqli_connect("localhost", "root", "", "sosmed");
-
  // Memeriksa apakah database terhubung
  if(!$conn) {
      echo"
@@ -27,7 +25,7 @@
      return $row; // Mengembalikan array 1 dimensi
  }
 
-// Mengambil lebih dari 1 baris data
+ // Mengambil lebih dari 1 baris data
  function findAll($query) {
      global $conn;
      $result = mysqli_query($conn, $query);
