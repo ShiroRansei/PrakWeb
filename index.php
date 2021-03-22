@@ -155,57 +155,28 @@
 				<div class="mx-auto text-center">
 					<h2 class="font-weight-bold mb-5">Cerita Temanmu</h2>
 				</div>
-				<div class="row py-3 align-items-center">
-					<div class="col-sm-3 text-center">
-						<img src="assets/img/faces/team-1.jpg" alt="Rounded image" class="img-fluid rounded shadow"
-							width="120">
-					</div>
-					<div class="col-sm-9">
-						<p class="font-weight-bold">
-							Harlequin
-							<small class="text-muted">Sunday 28-02-2021 04:13:12pm</small>
-						</p>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit corporis, eius
-							maxime nobis culpa deserunt ad iure earum, consequuntur similique ut
-							provident explicabo repellat dolorum sequi, odit expedita! Consectetur,
-							dolor.
-						</p>
-					</div>
-				</div>
-				<div class="row py-3 align-items-center">
-					<div class="col-sm-3 text-center">
-						<img src="assets/img/faces/team-1.jpg" alt="Rounded image" class="img-fluid rounded shadow"
-							width="120">
-					</div>
-					<div class="col-sm-9">
-						<p class="font-weight-bold">
-							Harlequin
-							<small class="text-muted">Sunday 28-02-2021 04:13:12pm</small>
-						</p>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit corporis, eius
-							maxime nobis culpa deserunt ad iure earum, consequuntur similique ut
-							provident explicabo repellat dolorum sequi, odit expedita! Consectetur,
-							dolor.
-						</p>
-					</div>
-				</div>
-				<div class="row py-3 align-items-center">
-					<div class="col-sm-3 text-center">
-						<img src="assets/img/faces/team-1.jpg" alt="Rounded image" class="img-fluid rounded shadow"
-							width="120">
-					</div>
-					<div class="col-sm-9">
-						<p class="font-weight-bold">
-							Harlequin
-							<small class="text-muted">Sunday 28-02-2021 04:13:12pm</small>
-						</p>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit corporis, eius
-							maxime nobis culpa deserunt ad iure earum, consequuntur similique ut
-							provident explicabo repellat dolorum sequi, odit expedita! Consectetur,
-							dolor.
-						</p>
-					</div>
-				</div>
+				<?php foreach($posts as $post) : ?>
+ 	<div class="row py-3 align-items-center">
+ 		<div class="col-sm-3 text-center">
+
+ 			<?php if($post["avatar"] != null) : ?>
+ 				<img src="avatar/<?= $post["avatar"]; ?>" alt="Rounded image" class="img-fluid rounded shadow"
+ 					width="120">
+ 			<?php else : ?>
+ 				<img src="assets/img/faces/team-1.jpg" alt="Rounded image" class="img-fluid rounded shadow"
+ 					width="120">
+ 			<?php endif; ?>
+ 					
+ 		</div>
+ 		<div class="col-sm-9">
+ 			<p class="font-weight-bold">
+ 				<?= $post["username"]; ?>
+ 				<small class="text-muted"><?= $post["created_at"]; ?></small>
+ 			</p>
+ 			<p><?= $post["content"]; ?></p>
+ 		</div>
+ 	</div>
+ <?php endforeach; ?>
 			</div>
 		</div>
 	</div>
