@@ -26,3 +26,14 @@
      $row = mysqli_fetch_assoc($result);
      return $row; // Mengembalikan array 1 dimensi
  }
+
+// Mengambil lebih dari 1 baris data
+ function findAll($query) {
+     global $conn;
+     $result = mysqli_query($conn, $query);
+     $rows = [];
+     while($row = mysqli_fetch_assoc($result)) {
+        array_push($rows, $row);
+     }
+     return $rows; // Mengembalikan array 2 dimensi
+}
