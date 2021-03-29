@@ -1,42 +1,42 @@
 <?php
-	require "config.php";
-	session_start();
-	date_default_timezone_set("Asia/Jakarta");
+ 	require "config.php";
+ 	session_start();
+ 	date_default_timezone_set("Asia/Jakarta");
 
-	// Memeriksa user logout atau belum login
-	if(!isset($_SESSION["login"]) || isset($_GET["logout"])) {
-		session_destroy();
-		echo"
-		<script>
-			document.location.href = 'login.php';
-		</script>";
-	}
+ 	// Memeriksa user logout atau belum login
+ 	if(!isset($_SESSION["login"]) || isset($_GET["logout"])) {
+ 		session_destroy();
+ 		echo"
+ 		<script>
+ 			document.location.href = 'login.php';
+ 		</script>";
+ 	}
 
-	$user_id = $_SESSION["login"];
-	$user = findOne("SELECT * FROM user WHERE id = '$user_id'");
+ 	$user_id = $_SESSION["login"];
+ 	$user = findOne("SELECT * FROM user WHERE id = '$user_id'");
 
-	// Relasi antara tabel user dan post
-	$posts = findAll("SELECT u.*, p.* FROM post p INNER JOIN user u WHERE p.user_id=u.id ORDER BY created_at DESC");
+ 	// Relasi antara tabel user dan post
+ 	$posts = findAll("SELECT u.*, p.* FROM post p INNER JOIN user u WHERE p.user_id=u.id ORDER BY created_at DESC");
+ 	
+ 	// Memeriksa method post yang dikirim ke halaman ini
+ 	if(isset($_POST["post"])) {
+ 		$content = $_POST["content"];
+ 		$created_at = date("Y-m-d H:i:s");
 
-	// Memeriksa method post yang dikirim ke halaman ini
-	if(isset($_POST["post"])) {
-		$content = $_POST["content"];
-		$created_at = date("Y-m-d H:i:s");
-
-		$create_post = commit("INSERT INTO post SET user_id='$user_id', content='$content', created_at='$created_at'");
-		if($create_post < 0) {
-			echo"
-			<script>
-				alert('Post gagal dikirim');
-				document.location.href = 'index.php';
-			</script>";
-		}
-		echo"
-		<script>
-			document.location.href = 'index.php';
-		</script>";
-	}
-?>
+ 		$create_post = commit("INSERT INTO post SET user_id='$user_id', content='$content', created_at='$created_at'");
+ 		if($create_post < 0) {
+ 			echo"
+ 			<script>
+ 				alert('Post gagal dikirim');
+ 				document.location.href = 'index.php';
+ 			</script>";
+ 		}
+ 		echo"
+ 		<script>
+ 			document.location.href = 'index.php';
+ 		</script>";
+ 	}
+ ?>
 
 
 <!DOCTYPE html>
@@ -65,7 +65,7 @@
 	<nav id="navbar-main"
 		class="navbar navbar-main navbar-expand-lg bg-white navbar-light position-sticky top-0 shadow py-2">
 		<div class="container">
-			<a class="navbar-brand mr-lg-5" href="index.html">
+			<a class="navbar-brand mr-lg-5" href="index.php">
 				<img src="assets/img/brand/blue.png">
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global"
@@ -76,7 +76,7 @@
 				<div class="navbar-collapse-header">
 					<div class="row">
 						<div class="col-6 collapse-brand">
-							<a href="index.html">
+							<a href="index.php">
 								<img src="assets/img/brand/blue.png">
 							</a>
 						</div>
@@ -92,7 +92,7 @@
 				</div>
 				<ul class="navbar-nav navbar-nav-hover align-items-lg-center">
 					<li class="nav-item">
-						<a href="index.html" class="nav-link" role="button">
+						<a href="index.php" class="nav-link" role="button">
 							<i class="ni ni-collection d-lg-none"></i>
 							<span class="nav-link-inner--text">Home</span>
 						</a>
